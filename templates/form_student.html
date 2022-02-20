@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title>New Student</title>
+</head>
+
+<body>
+    
+    {% if pagetype == "confirm" %} <!--jinja code-->
+            <h2>Confirm form submission</h2>
+        <table>
+            <tr>
+                <th>Student</th>
+                <td>Name: {{ student_name }}</td>
+            </tr>
+
+            <tr>
+                <th>Student</th>
+                <td>Age: {{ student_age }}</td>
+            </tr>
+
+            <tr>
+                <th>Student</th>
+                <td>Nationality: {{ student_nationality }}</td>
+            </tr>
+        </table>
+
+
+        <p> Is this correct?</p>
+        <!-- "Yes" button goes here -->
+        <form action="{{ form_meta['action'] }}" method= "{{ form_meta['method'] }}">
+        <!-- need name and value attribute for the data to be submitted -->
+        {% for name, value in form_data.items() %}
+            <input type= "hidden" name= "{{ name }}" value= "{{ value }}"> <!--temp store info, send info over, confirmation page is like a middle page -->
+        {% endfor %}
+            <input type="submit" value= "Yes" />
+        </form>
+
+    {% else %}
+    
+        <form action= {{ form_meta['action'] }} method= {{ form_meta['method'] }}> 
+        <!-- post for senstive data eg pw -->
+        <label for="student_name">Student Name:</label>
+        <!-- 'for'Specifies the id of the form element the label should be bound to -->
+        <input id="student_name" type="text" name="field_name" value=""><br/><br/>
+        <label for="age"> Age:</label>
+        <input id="age" type="text" name="field_age" value=""><br/><br/>
+        <label for="nationality"> Nationality: </label>
+        <input id="nationality" type="text" name="field_nationality" value=''>
+        <input type='submit' value='submit'>
+
+        </form>
+
+    {% endif %}
+
+</body>
+</html>
